@@ -244,6 +244,15 @@ python3 scripts/generate_html.py \\
 | \`references/four_hua_reference.md\`   | 分析四化飞星、算流年/大限运势时查阅        |
 | \`references/extended_modules.md\`     | 用户问买房年份、个人方位、合盘等进阶问题时查阅（含系统边界声明） |
 
+## 脚本
+
+| 脚本                        | 用途                              |
+| ------------------------- | ------------------------------- |
+| \`scripts/calculate_chart.py\`     | 排盘（支持真太阳时校正 \`--time/--city\`）|
+| \`scripts/generate_html.py\`       | 生成可视化命盘 HTML                 |
+| \`scripts/calculate_horoscope.py\` | 流年四化飞宫——买房择年 / 婚姻择年 / 合盘（别手算） |
+| \`scripts/calculate_bazhai.py\`    | 八宅命卦方位（风水，非紫微；别手算命卦） |
+
 ## 完整示例流程
 
 \`\`\`
