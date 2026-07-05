@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>紫微斗数命盘解读 · 一九九五年三月三十</title>
+<style>
+  :root {
+    --paper: #F3ECDD;
+    --paper2: #EFE6D2;
+    --ink: #2B2622;
+    --vermil: #C0362C;
+    --vermil-d: #9E2A22;
+    --gold: #A9843F;
+    --gold-d: #8A6A2F;
+    --line: #C9B79B;
+    --muted: #7A6E5C;
+    --good: #3f6d3a;
+    --warn: #C0362C;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: 'Songti SC','STSong','Noto Serif SC',serif; min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 18% 22%,rgba(169,132,63,.10),transparent 42%),
+      radial-gradient(circle at 82% 30%,rgba(192,54,44,.06),transparent 40%),
+      radial-gradient(circle at 30% 78%,rgba(169,132,63,.09),transparent 45%),
+      radial-gradient(circle at 72% 85%,rgba(169,132,63,.07),transparent 40%);
+    background-attachment: fixed;
+  }
+  .page { max-width: 1000px; margin: 0 auto; padding: 32px 18px 60px; }
+
+  /* Header · 报头 */
+  .header { text-align: center; margin-bottom: 30px; }
+  .header-en { font-family: 'Times New Roman',Georgia,serif; letter-spacing: .42em; font-size: 12px; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; padding-left: .42em; }
+  .header-title { font-size: 2.6rem; color: var(--vermil); letter-spacing: 0.28em; padding-left: .28em; font-weight: 700; text-shadow: 1px 1px 0 rgba(158,42,34,.15); }
+  .header-sub { color: var(--muted); margin-top: 14px; font-size: 0.85rem; letter-spacing: .3em; padding-left: .3em; }
+  .decadal-banner { border: 1px solid var(--gold); box-shadow: 0 0 0 2px var(--paper),0 0 0 3px var(--vermil); padding: 8px 20px; display: inline-block; margin-top: 18px; color: var(--vermil-d); font-size: 0.85rem; letter-spacing: .12em; background: var(--paper2); }
+
+  /* Palace Grid · 十二宫盘 */
+  .grid-section { margin-bottom: 34px; border: 1px solid var(--vermil); box-shadow: 0 0 0 3px var(--paper),0 0 0 4px var(--gold); padding: 6px; background: var(--paper2); }
+  table.palace-grid { width: 100%; border-collapse: collapse; table-layout: fixed; border: 1px solid var(--gold); }
+  .palace-cell { border: .5px solid var(--line); background: rgba(243,236,221,.5); padding: 8px 9px; vertical-align: top; height: 108px; }
+  .palace-cell.empty { background: rgba(201,183,155,.12); }
+  .center-cell { background: var(--paper2); border: 1px solid var(--vermil); vertical-align: middle; }
+  .center-info { text-align: center; padding: 12px; }
+  .center-stamp { width: 108px; height: 108px; margin: 0 auto 14px; background: var(--vermil); border-radius: 6px; position: relative; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px var(--paper2),0 0 0 3px var(--vermil-d); background-image: radial-gradient(circle at 35% 30%,rgba(255,255,255,.14),transparent 45%),radial-gradient(circle at 70% 75%,rgba(90,20,14,.30),transparent 50%); }
+  .center-stamp::before { content:""; position:absolute; inset:8px; border:1.5px solid rgba(243,236,221,.5); }
+  .stamp-zi { font-size: 60px; color: var(--paper); font-weight: 700; line-height: 1; }
+  .center-item { color: var(--muted); font-size: 0.8rem; line-height: 1.9; letter-spacing: .08em; }
+  .palace-header { display: flex; align-items: center; gap: 4px; margin-bottom: 5px; padding-bottom: 3px; border-bottom: .5px solid var(--line); flex-wrap: wrap; }
+  .palace-stem-branch { color: var(--gold); font-size: 0.72rem; font-weight: 700; margin-left: auto; order: 2; }
+  .palace-name { color: var(--vermil-d); font-size: 0.78rem; letter-spacing: .06em; order: 1; }
+  .palace-stars { font-size: 0.82rem; line-height: 1.6; color: var(--ink); }
+  .star-major { color: var(--ink); font-weight: 700; }
+  .star-minor { color: var(--muted); }
+  .star-minor.tough { color: var(--vermil); }
+  .star-adj { color: #9a8e78; font-size: 0.7em; }
+  .brightness { color: var(--muted); font-size: 0.66em; margin-left: 1px; }
+  .decadal { color: var(--muted); font-size: 0.66rem; margin-top: 4px; }
+  .badge { font-size: 0.62rem; padding: 1px 5px; font-weight: 700; border: 1px solid var(--vermil); color: var(--vermil); border-radius: 2px; order: 3; }
+  .badge.soul { background: var(--vermil); color: var(--paper); }
+  .badge.body { background: var(--paper); color: var(--vermil); }
+
+  /* Reading Cards · 解读卡 */
+  .reading-section { margin-bottom: 32px; }
+  .reading-grid { display: flex; flex-wrap: wrap; gap: 16px; }
+  .reading-card { background: var(--paper2); border: 1px solid var(--gold); box-shadow: 0 0 0 3px var(--paper),0 0 0 4px var(--vermil); padding: 22px 20px; flex: 1; min-width: 280px; position: relative; }
+  .card-full { flex-basis: 100%; }
+  .card-half { flex-basis: calc(50% - 8px); }
+  .card-highlight { box-shadow: 0 0 0 3px var(--paper),0 0 0 4px var(--gold); border-color: var(--vermil); }
+  .card-teal { border-color: var(--vermil); }
+  .card-title { color: var(--ink); font-size: 1.1rem; letter-spacing: .06em; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .card-badge { background: var(--vermil); color: var(--paper); font-size: 0.78rem; padding: 3px 12px; letter-spacing: .12em; font-weight: normal; }
+  .card-body { color: var(--ink); font-size: 0.92rem; line-height: 1.9; }
+  .card-body strong { color: var(--vermil-d); }
+  .card-body em { color: var(--gold); font-style: normal; font-weight: 700; }
+  .card-body .warn { color: var(--vermil); font-weight: 700; }
+  .card-body .good { color: var(--good); font-weight: 700; }
+
+  /* Probability bars · 置信度 */
+  .prob-bars { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .prob-item { display: flex; align-items: center; gap: 10px; }
+  .prob-label { color: var(--muted); font-size: 0.75rem; width: 120px; flex-shrink: 0; letter-spacing: .05em; }
+  .prob-bar-bg { flex: 1; height: 6px; background: rgba(201,183,155,.4); border: .5px solid var(--line); overflow: hidden; }
+  .prob-bar-fill { height: 100%; background: var(--vermil); }
+  .prob-pct { color: var(--vermil-d); font-size: 0.75rem; width: 36px; text-align: right; font-weight: 700; }
+
+  /* Hand reading · 手相 */
+  .hand-section { margin-bottom: 32px; }
+  .hand-grid { display: flex; flex-wrap: wrap; gap: 16px; }
+  .hand-item { background: var(--paper2); border: 1px solid var(--line); padding: 16px; flex: 1; min-width: 220px; }
+  .hand-item-title { color: var(--vermil-d); font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; letter-spacing: .05em; }
+  .hand-item-body { color: var(--ink); font-size: 0.85rem; line-height: 1.75; margin-bottom: 8px; }
+  .hand-status { font-size: 0.75rem; padding: 3px 10px; display: inline-block; border: .5px solid; }
+  .status-match { color: var(--good); border-color: var(--good); }
+  .status-conflict { color: var(--vermil); border-color: var(--vermil); }
+  .resolution { color: var(--muted); font-size: 0.8rem; margin-top: 6px; }
+
+  /* Calibration · 校准 */
+  .calibration-section { background: var(--paper2); border: 1px solid var(--gold); box-shadow: 0 0 0 3px var(--paper),0 0 0 4px var(--vermil); padding: 24px 22px; margin-bottom: 32px; }
+  .section-title { color: var(--vermil); font-size: 1.15rem; margin-bottom: 14px; letter-spacing: .12em; }
+  .cal-note { color: var(--muted); font-size: 0.85rem; margin-bottom: 16px; letter-spacing: .04em; }
+  .cal-questions { display: flex; flex-direction: column; gap: 10px; }
+  .cal-question { background: var(--paper); border: .5px solid var(--line); padding: 14px; }
+  .cal-text { color: var(--ink); font-size: 0.9rem; }
+  .cal-hint { color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
+
+  .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 26px 0; border-top: 1px solid var(--line); margin-top: 34px; letter-spacing: .12em; }
+  .footer .footer-en { font-family: 'Times New Roman',serif; display: block; margin-top: 6px; letter-spacing: .3em; color: var(--gold); }
+  .colophon { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 18px; }
+  .brand-seal { width: 34px; height: 34px; background: var(--vermil); color: var(--paper); font-weight: 700; font-size: 20px; display: flex; align-items: center; justify-content: center; border-radius: 3px; transform: rotate(-4deg); position: relative; background-image: radial-gradient(circle at 70% 75%,rgba(90,20,14,.30),transparent 55%); }
+  .brand-seal::before { content:""; position:absolute; inset:3px; border:1px solid rgba(243,236,221,.5); border-radius:2px; }
+  .colophon .brand-txt { font-size: 0.72rem; color: var(--muted); letter-spacing: .12em; text-align: left; line-height: 1.5; }
+  .colophon .brand-txt b { color: var(--vermil-d); font-weight: 700; }
+  @media (max-width: 600px) {
+    .card-half { flex-basis: 100%; }
+    .palace-cell { padding: 4px; }
+    .palace-name { font-size: 0.72rem; }
+    .header-title { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="header-en">Purple Star Astrology · Destiny Chart</div>
+    <div class="header-title">紫微命盘</div>
+    <div class="header-sub">一九九五年三月三十 · 女 · 巳时</div>
+    <div class="decadal-banner">当前大限 · 丑宫·天相·25-34岁</div>
+  </div>
+
+  <div class="grid-section">
+    <table class="palace-grid">
+      <tr><td class="palace-cell" data-branch="亥">
+  <div class="palace-header">
+    <span class="palace-stem-branch">丁亥</span>
+    <span class="palace-name">命宫</span>
+    <span class="badge soul">命</span>
+  </div>
+  <div class="palace-stars"><span class="star-major">廉贞<span class="brightness">平</span></span> <span class="star-major">贪狼<span class="brightness">旺</span></span> <br><br><span class="star-adj">三台</span> <span class="star-adj">凤阁</span> <span class="star-adj">台辅</span> </div>
+  
+</td><td class="palace-cell" data-branch="戌">
+  <div class="palace-header">
+    <span class="palace-stem-branch">丙戌</span>
+    <span class="palace-name">兄弟宫</span>
+    
+  </div>
+  <div class="palace-stars"><span class="star-major">太阴<span class="brightness">平</span><span style="color:#b23a2b;font-size:0.7em;margin-left:2px;font-weight:700">[忌]</span></span> <br><br><span class="star-major">天喜</span> <span class="star-major">解神</span> <span class="star-adj">天才</span> </div>
+  
+</td><td class="palace-cell" data-branch="酉">
+  <div class="palace-header">
+    <span class="palace-stem-branch">乙酉</span>
+    <span class="palace-name">夫妻宫</span>
+    <span class="badge body">身</span>
+  </div>
+  <div class="palace-stars"><span class="star-major">天府<span class="brightness">庙</span></span> <br><span class="star-minor">文曲</span> <br><span class="star-adj">恩光</span> <span class="star-adj">旬空</span> <span class="star-adj">破碎</span> </div>
+  
+</td><td class="palace-cell" data-branch="申">
+  <div class="palace-header">
+    <span class="palace-stem-branch">甲申</span>
+    <span class="palace-name">子女宫</span>
+    
+  </div>
+  <div class="palace-stars"><br><span class="star-minor">右弼</span> <span class="star-minor">天钺</span> <br><span class="star-adj">天寿</span> <span class="star-adj">天福</span> <span class="star-adj">天德</span> </div>
+  
+</td></tr>
+<tr><td class="palace-cell" data-branch="子">
+  <div class="palace-header">
+    <span class="palace-stem-branch">戊子</span>
+    <span class="palace-name">父母宫</span>
+    
+  </div>
+  <div class="palace-stars"><span class="star-major">巨门<span class="brightness">旺</span></span> <br><span class="star-minor">天魁</span> <br><span class="star-major">咸池</span> <span class="star-adj">天空</span> </div>
+  
+</td><td class="center-cell" colspan="2" rowspan="2">
+                      <div class="center-info">
+                        <div class="center-stamp"><span class="stamp-zi">命</span></div>
+                        <div class="center-item">土五局 · 女 · 巳时</div>
+                        <div class="center-item">农历 一九九五年三月三十</div>
+                        <div class="center-item">命宫 亥 · 身宫 酉</div>
+                      </div>
+                    </td><td class="palace-cell" data-branch="未">
+  <div class="palace-header">
+    <span class="palace-stem-branch">癸未</span>
+    <span class="palace-name">财帛宫</span>
+    
+  </div>
+  <div class="palace-stars"><span class="star-major">紫微<span class="brightness">庙</span><span style="color:#2f5fa5;font-size:0.7em;margin-left:2px;font-weight:700">[科]</span></span> <span class="star-major">破军<span class="brightness">平</span></span> <br><br><span class="star-adj">封诰</span> <span class="star-adj">华盖</span> <span class="star-adj">空亡</span> </div>
+  
+</td></tr>
+<tr><td class="palace-cell" data-branch="丑">
+  <div class="palace-header">
+    <span class="palace-stem-branch">己丑</span>
+    <span class="palace-name">福德宫</span>
+    
+  </div>
+  <div class="palace-stars"><span class="star-major">天相<span class="brightness">庙</span></span> <br><br><span class="star-adj">天贵</span> <span class="star-adj">蜚廉</span> </div>
+  
+</td><td class="palace-cell" data-branch="午">
+  <div class="palace-header">
+    <span class="palace-stem-branch">壬午</span>
+    <span class="palace-name">疾厄宫</span>
+    
+  </div>
+  <div class="palace-stars"><span class="star-major">天机<span class="brightness">平</span><span style="color:#3f6d3a;font-size:0.7em;margin-left:2px;font-weight:700">[禄]</span></span> <br><span class="star-minor">左辅</span> <span class="star-minor tough">地空</span> <br><span class="star-adj">天厨</span> <span class="star-adj">截路</span> <span class="star-adj">天使</span> </div>
+  
+</td></tr>
+<tr><td class="palace-cell" data-branch="寅">
+  <div class="palace-header">
+    <span class="palace-stem-branch">戊寅</span>
+    <span class="palace-name">田宅宫</span>
+    
+  </div>
+  <div class="palace-stars"><span class="star-major">天同<span class="brightness">得</span></span> <span class="star-major">天梁<span class="brightness">庙</span><span style="color:#9a6a1f;font-size:0.7em;margin-left:2px;font-weight:700">[权]</span></span> <br><span class="star-minor tough">火星</span> <span class="star-minor tough">陀罗</span> <br><span class="star-adj">天巫</span> <span class="star-adj">孤辰</span> </div>
+  
+</td><td class="palace-cell" data-branch="卯">
+  <div class="palace-header">
+    <span class="palace-stem-branch">己卯</span>
+    <span class="palace-name">官禄宫</span>
+    
+  </div>
+  <div class="palace-stars"><span class="star-major">武曲<span class="brightness">陷</span></span> <span class="star-major">七杀<span class="brightness">庙</span></span> <br><span class="star-minor tough">铃星</span> <span class="star-major">禄存</span> <br><span class="star-major">天姚</span> <span class="star-adj">八座</span> <span class="star-adj">龙池</span> </div>
+  
+</td><td class="palace-cell" data-branch="辰">
+  <div class="palace-header">
+    <span class="palace-stem-branch">庚辰</span>
+    <span class="palace-name">交友宫</span>
+    
+  </div>
+  <div class="palace-stars"><span class="star-major">太阳<span class="brightness">庙</span></span> <br><span class="star-minor tough">地劫</span> <span class="star-minor tough">擎羊</span> <br><span class="star-major">红鸾</span> <span class="star-adj">天官</span> <span class="star-adj">天月</span> </div>
+  
+</td><td class="palace-cell" data-branch="巳">
+  <div class="palace-header">
+    <span class="palace-stem-branch">辛巳</span>
+    <span class="palace-name">迁移宫</span>
+    
+  </div>
+  <div class="palace-stars"><br><span class="star-minor">文昌</span> <span class="star-major">天马</span> <br><span class="star-adj">天虚</span> </div>
+  
+</td></tr>
+    </table>
+  </div>
+
+  <div class="reading-section">
+    <div class="reading-grid">
+      <div class="reading-card card-full card-highlight">
+          <div class="card-title">命盘底色 · 先天禀赋<span class="card-badge">廉贞·贪狼</span></div>
+          <div class="card-body">命宫落<em>亥宫</em>，廉贞平、<em>贪狼旺</em>。<strong>你是那种走进房间气场先到的人。</strong><br><br><span class="good">积极面：有品味、有创意。</span> <span class="warn">需留意：欲望强、贪新鲜。</span></div>
+          <div class="prob-bars"><div class="prob-item">
+                  <div class="prob-label">底色契合度</div>
+                  <div class="prob-bar-bg"><div class="prob-bar-fill" style="width:78%"></div></div>
+                  <div class="prob-pct">78%</div>
+                </div><div class="prob-item">
+                  <div class="prob-label">校准后可达</div>
+                  <div class="prob-bar-bg"><div class="prob-bar-fill" style="width:88%"></div></div>
+                  <div class="prob-pct">88%</div>
+                </div></div>
+        </div>
+<div class="reading-card card-half ">
+          <div class="card-title">事业运 · 官禄宫<span class="card-badge">武曲·七杀</span></div>
+          <div class="card-body">官禄宫卯，武曲七杀。<strong>事业靠自己打出来。</strong></div>
+          <div class="prob-bars"><div class="prob-item">
+                  <div class="prob-label">吻合度</div>
+                  <div class="prob-bar-bg"><div class="prob-bar-fill" style="width:72%"></div></div>
+                  <div class="prob-pct">72%</div>
+                </div></div>
+        </div>
+    </div>
+  </div>
+
+  <div class="hand-section">
+      <h3 class="section-title">手相互证</h3>
+      <div class="hand-grid"><div class="hand-item">
+          <div class="hand-item-title">感情线</div>
+          <div class="hand-item-body">深而长，情感投入度高。</div>
+          <div class="hand-status status-match">与身宫入夫妻共振 ✓</div>
+          
+        </div></div>
+    </div>
+  <div class="calibration-section">
+      <h3 class="section-title">校准追问</h3>
+      <div class="cal-note">回答以下问题，可将解读准确度从约70%提升至85%+</div>
+      <div class="cal-questions"><div class="cal-question"><div class="cal-text">❓ 目前从事什么工作？</div><div class="cal-hint">核实官禄宫推断</div></div></div>
+    </div>
+
+  <div class="footer">
+    象由心生 · 命由象推　命盘显示可能性，行动决定现实
+    <span class="footer-en">A map of probabilities, not a verdict.</span>
+    <div class="colophon">
+      <span class="brand-seal">真</span>
+      <span class="brand-txt"><b>真斗</b> · TrueStars<br>紫微斗数 · 只说真话的命理</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

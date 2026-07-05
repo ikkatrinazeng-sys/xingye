@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>命盘 · 设计概念稿</title>
+<style>
+  :root{
+    --paper:#F3ECDD;        /* 纸底 */
+    --paper2:#EFE6D2;       /* 稍深纸 */
+    --ink:#2B2622;          /* 墨 */
+    --vermil:#C0362C;       /* 朱砂红 */
+    --vermil-d:#9E2A22;     /* 深红 */
+    --gold:#A9843F;         /* 赭金 */
+    --gold-l:#C6A560;       /* 亮金 */
+    --line:#C9B79B;         /* 花边线 */
+    --muted:#7A6E5C;        /* 淡墨 */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Songti SC","STSong","Noto Serif SC",serif;
+    line-height:1.7;
+    padding:32px 18px 80px;
+    background-image:
+      radial-gradient(circle at 18% 22%,rgba(169,132,63,.10),transparent 42%),
+      radial-gradient(circle at 82% 30%,rgba(192,54,44,.06),transparent 40%),
+      radial-gradient(circle at 30% 78%,rgba(169,132,63,.09),transparent 45%),
+      radial-gradient(circle at 72% 85%,rgba(169,132,63,.07),transparent 40%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:760px;margin:0 auto}
+
+  /* ---------- 报头 ---------- */
+  .masthead{text-align:center;position:relative;padding:24px 0 20px}
+  .mast-en{
+    font-family:"Times New Roman",Georgia,serif;
+    letter-spacing:.42em;font-size:12px;color:var(--gold);
+    text-transform:uppercase;margin-bottom:14px;padding-left:.42em;
+  }
+  .mast-title{
+    font-size:52px;font-weight:700;color:var(--vermil);
+    letter-spacing:.28em;padding-left:.28em;line-height:1;
+    text-shadow:1px 1px 0 rgba(158,42,34,.15);
+  }
+  .mast-sub{
+    margin-top:16px;font-size:13px;color:var(--muted);letter-spacing:.3em;
+    padding-left:.3em;
+  }
+  .rule{display:flex;align-items:center;gap:14px;margin:22px auto;max-width:420px}
+  .rule::before,.rule::after{content:"";flex:1;height:1px;background:var(--line)}
+  .rule span{color:var(--gold);font-size:14px;letter-spacing:.3em}
+
+  /* 双线边框 */
+  .frame{
+    border:1px solid var(--vermil);
+    box-shadow:0 0 0 3px var(--paper),0 0 0 4px var(--gold);
+    padding:26px 22px;background:var(--paper2);position:relative;margin-bottom:34px;
+  }
+  .frame .corner{position:absolute;width:20px;height:20px;border:2px solid var(--gold)}
+  .corner.tl{top:6px;left:6px;border-right:0;border-bottom:0}
+  .corner.tr{top:6px;right:6px;border-left:0;border-bottom:0}
+  .corner.bl{bottom:6px;left:6px;border-right:0;border-top:0}
+  .corner.br{bottom:6px;right:6px;border-left:0;border-top:0}
+
+  /* ---------- 十二宫盘 ---------- */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--gold)}
+  .cell{
+    border:.5px solid var(--line);min-height:98px;padding:8px 9px;position:relative;
+    background:var(--paper);
+  }
+  .cell .pname{
+    font-size:11px;color:var(--vermil-d);letter-spacing:.15em;
+    border-bottom:.5px solid var(--line);padding-bottom:3px;margin-bottom:5px;
+    display:flex;justify-content:space-between;
+  }
+  .cell .pname .branch{color:var(--gold);font-weight:700}
+  .cell .stars{font-size:14px;color:var(--ink);line-height:1.5}
+  .cell .star-min{font-size:11px;color:var(--muted)}
+  .cell.center{
+    grid-column:2 / 4;grid-row:2 / 4;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;background:var(--paper2);
+    border:1px solid var(--vermil);
+  }
+  .stamp{
+    width:118px;height:118px;background:var(--vermil);
+    display:flex;align-items:center;justify-content:center;
+    border-radius:6px;position:relative;box-shadow:0 0 0 2px var(--paper2),0 0 0 3px var(--vermil-d);
+    background-image:radial-gradient(circle at 35% 30%,rgba(255,255,255,.14),transparent 45%),
+                     radial-gradient(circle at 70% 75%,rgba(90,20,14,.32),transparent 50%);
+  }
+  .stamp::before{content:"";position:absolute;inset:8px;border:1.5px solid rgba(243,236,221,.55)}
+  .stamp .zi{font-size:66px;color:var(--paper);font-weight:700;line-height:1;
+    font-family:"Songti SC","STSong",serif}
+  .center .info{font-size:12px;color:var(--muted);margin-top:14px;letter-spacing:.12em;text-align:center}
+  .cell.hl{outline:2px solid var(--vermil);outline-offset:-2px}
+  .seal{
+    position:absolute;bottom:6px;right:7px;width:26px;height:26px;
+    border:1.5px solid var(--vermil);color:var(--vermil);font-size:9px;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    line-height:1.05;opacity:.85;transform:rotate(-4deg);border-radius:2px;
+  }
+
+  /* ---------- 解读卡 ---------- */
+  .card{margin-bottom:26px;position:relative}
+  .card-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .card-badge{
+    background:var(--vermil);color:var(--paper);font-size:13px;
+    padding:4px 12px;letter-spacing:.14em;position:relative;
+  }
+  .card-badge::after{content:"";position:absolute;inset:2px;border:.5px solid rgba(243,236,221,.5)}
+  .card-title{font-size:20px;color:var(--ink);letter-spacing:.08em}
+  .card-title .en{
+    display:block;font-family:"Times New Roman",serif;font-size:10px;
+    color:var(--gold);letter-spacing:.35em;text-transform:uppercase;margin-top:2px;
+  }
+  .card-body{font-size:15px;color:var(--ink);line-height:1.9}
+  .card-body em{font-style:normal;color:var(--gold);font-weight:700}
+  .card-body strong{color:var(--vermil-d)}
+  .tag-good{color:#3f6d3a;border-bottom:1px dotted #3f6d3a}
+  .tag-warn{color:var(--vermil);border-bottom:1px dotted var(--vermil)}
+  .vseal{
+    writing-mode:vertical-rl;position:absolute;top:0;right:-4px;
+    font-size:11px;color:var(--gold);letter-spacing:.3em;opacity:.7
+  }
+
+  .note{text-align:center;font-size:12px;color:var(--muted);letter-spacing:.15em;margin-top:40px}
+  .note .en{font-family:"Times New Roman",serif;display:block;margin-top:4px;letter-spacing:.3em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 报头 -->
+  <div class="masthead">
+    <div class="mast-en">Purple Star Astrology · Destiny Chart</div>
+    <div class="mast-title">紫微命盘</div>
+    <div class="mast-sub">乙亥年 · 坤造 · 巳时生</div>
+  </div>
+
+  <div class="rule"><span>❖  三合中州  ❖</span></div>
+
+  <!-- 十二宫盘 -->
+  <div class="frame">
+    <span class="corner tl"></span><span class="corner tr"></span>
+    <span class="corner bl"></span><span class="corner br"></span>
+    <div class="grid">
+      <div class="cell"><div class="pname"><span>迁移</span><span class="branch">巳</span></div><div class="stars star-min">空宫 · 借天机</div></div>
+      <div class="cell"><div class="pname"><span>疾厄</span><span class="branch">午</span></div><div class="stars">天机<span class="star-min">平</span></div></div>
+      <div class="cell"><div class="pname"><span>财帛</span><span class="branch">未</span></div><div class="stars">紫微<span class="star-min">庙</span> 破军</div><div class="seal">财科</div></div>
+      <div class="cell"><div class="pname"><span>子女</span><span class="branch">申</span></div><div class="stars star-min">空宫</div></div>
+
+      <div class="cell"><div class="pname"><span>交友</span><span class="branch">辰</span></div><div class="stars">太阳<span class="star-min">庙</span></div></div>
+      <div class="cell center">
+        <div class="stamp"><span class="zi">命</span></div>
+        <div class="info">水二局 · 廉贞贪狼坐命 · 身宫在夫妻</div>
+      </div>
+      <div class="cell hl"><div class="pname"><span>夫妻·身</span><span class="branch">酉</span></div><div class="stars">天府<span class="star-min">庙</span></div><div class="seal">身宫</div></div>
+
+      <div class="cell"><div class="pname"><span>官禄</span><span class="branch">卯</span></div><div class="stars">武曲<span class="star-min">陷</span> 七杀</div></div>
+      <div class="cell"><div class="pname"><span>兄弟</span><span class="branch">戌</span></div><div class="stars">太阴<span class="star-min">平</span></div></div>
+
+      <div class="cell"><div class="pname"><span>田宅</span><span class="branch">寅</span></div><div class="stars">天同 天梁</div></div>
+      <div class="cell hl"><div class="pname"><span>命宫</span><span class="branch">亥</span></div><div class="stars">廉贞<span class="star-min">平</span> 贪狼<span class="star-min">旺</span></div><div class="seal">命</div></div>
+      <div class="cell"><div class="pname"><span>父母</span><span class="branch">子</span></div><div class="stars">巨门<span class="star-min">旺</span></div></div>
+      <div class="cell"><div class="pname"><span>福德</span><span class="branch">丑</span></div><div class="stars">天相<span class="star-min">庙</span></div></div>
+    </div>
+  </div>
+
+  <div class="rule"><span>❖  命盘详解  ❖</span></div>
+
+  <!-- 解读卡 -->
+  <div class="card frame" style="background:var(--paper);">
+    <span class="corner tl"></span><span class="corner tr"></span>
+    <span class="corner bl"></span><span class="corner br"></span>
+    <div class="vseal">大 吉</div>
+    <div class="card-head">
+      <span class="card-badge">廉贞·贪狼</span>
+      <div class="card-title">命盘底色 · 先天禀赋<span class="en">The Innate Nature</span></div>
+    </div>
+    <div class="card-body">
+      命宫落<em>亥宫</em>，廉贞平、<em>贪狼旺</em>。用一句话概括这个格局：<strong>你是那种走进一个房间，气场就已经先到了的人。</strong><br><br>
+      贪狼在亥旺地，是紫微斗数里最具才华魅力的星之一——能歌善舞，社交魅力天生。<span class="tag-good">积极面：你极少是无聊单一的人，有品味、有创意。</span> <span class="tag-warn">需留意：欲望强、对新鲜感有执念，容易在旧秩序里感到窒息。</span>
+    </div>
+  </div>
+
+  <div class="note">象由心生 · 命由象推　命盘显示可能性，行动决定现实
+    <span class="en">A map of probabilities, not a verdict.</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# 生成的命盘输出 / 临时数据
+*.local.html
+/tmp/
+chart.json
+reading.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 系统
+.DS_Store
