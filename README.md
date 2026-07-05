@@ -8,6 +8,10 @@
 
 `Claude Code Skill` · `紫微斗数` · `真太阳时排盘` · `可视化命盘`
 
+<br>
+
+<img src="assets/preview.png" alt="星野录命盘示例" width="620">
+
 </div>
 
 ---
@@ -87,7 +91,7 @@ skills/mingli-master/
 
 ## License
 
-[MIT](LICENSE) © [katrinazeng](https://github.com/katrinazeng)
+[MIT](LICENSE) © [katrinazeng](https://github.com/ikkatrinazeng-sys)
 
 <div align="center">
 <br>
