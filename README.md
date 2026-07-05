@@ -53,7 +53,7 @@ python3 -m pip install iztro-py --user
 在 Claude Code 里直接说：
 
 ```
-帮我看看命盘：1995年4月29日 上午10点，女，湖南郴州
+帮我看看命盘：xxxx年x月xx日 上午x点，女/男，xxx
 ```
 
 skill 会自动触发，完成排盘 → 解读 → 生成 HTML 命盘。也支持：
