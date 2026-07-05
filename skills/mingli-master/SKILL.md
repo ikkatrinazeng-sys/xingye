@@ -76,17 +76,30 @@ python3 -m pip install iztro-py --user
 
 ### 第二步：排盘计算
 
-用 \`calculate_chart.py\` 脚本进行精确排盘：
+用 \`calculate_chart.py\` 脚本进行精确排盘。
+
+**首选：精确时间 + 出生地，做真太阳时校正**（准确度最高，务必优先走这条）：
 
 \`\`\`
-# 公历
-python3 scripts/calculate_chart.py --solar 1991-8-15 --hour 1 --gender 男 --output /tmp/chart.json
+# 有精确出生时间(HH:MM) + 城市 → 自动经度校正
+python3 scripts/calculate_chart.py --solar 1995-4-29 --time 10:00 --city 郴州 --gender 女 --output /tmp/chart.json
 
-# 农历
-python3 scripts/calculate_chart.py --lunar 1991-7-6 --hour 1 --gender 男 --output /tmp/chart.json
+# 城市未收录时，直接传经度
+python3 scripts/calculate_chart.py --solar 1995-4-29 --time 10:00 --longitude 112.9 --gender 女 --output /tmp/chart.json
+
+# 追求极致精确可加 --eot（计入均时差）
+\`\`\`
+
+**为什么必须校正**：中国全境用东八区(120°E)北京时间，各地实际经度不同，钟表时间≠当地太阳时。经度时差 =(经度−120)×4 分钟。出生在时辰交界附近的人，这个偏移会把命宫推到隔壁宫，整张盘就错了。脚本会自动换算并在**跨越时辰边界时告警**，校正详情写入输出 JSON 的 \`true_solar_time_correction\` 字段——解读时应把这个校正情况告知用户。
+
+**退路：只知道时辰、无精确时间**（准确度打折，需在解读中说明）：
+
+\`\`\`
+python3 scripts/calculate_chart.py --solar 1995-4-29 --hour 5 --gender 女 --output /tmp/chart.json
+# 农历同理，把 --solar 换成 --lunar
 
 # 时辰索引对照：
-# 0=早子时(23-00) 1=丑时(01-03) 2=寅时(03-05) 3=卯时(05-07)
+# 0=早子时(00-01) 1=丑时(01-03) 2=寅时(03-05) 3=卯时(05-07)
 # 4=辰时(07-09) 5=巳时(09-11) 6=午时(11-13) 7=未时(13-15)
 # 8=申时(15-17) 9=酉时(17-19) 10=戌时(19-21) 11=亥时(21-23)
 # 12=晚子时(23-00)
